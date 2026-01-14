@@ -1,0 +1,19 @@
+﻿
+** Controllerdan Viewlere Data Transferi  
+
+ViewBag: 
+	-Controllerdan yönlendirildiği ilk sayfaya data taşır. 
+	-Her ViewBag tanımlı olduğu metot üzerinden ilişkili olduğu view sayfasına taşınır.
+	-ViewBag tanımı bir kez kullanıldığında taşıma işlemi biter.
+
+ViewData: 
+	-Controllerdan yönlendirildiği ilk sayfaya data taşır. 
+	-Her ViewData tanımlı olduğu metot üzerinden ilişkili olduğu view sayfasına taşınır.
+	-ViewData tanımı bir kez kullanıldığında taşıma işlemi biter.
+
+TempData: 
+	-Controllerdan yönlendirilidiği ilk sayfada kullanılınmaz ise ikinci sayfaya kadar data taşır.
+	-TempData tanımlı olduğu metot üzerinden ilişkili olduğu view sayfasına taşınır ama bu sayfada kullanılmaz ise 1 yönlendirme daha taşınır.
+	-TempData tanımı bir kez kullanıldığında taşıma işlemi biter.
+
+*** Controller üzerinden bir view açmak için Url adresine ilke olarak controlleradı/actionadı yazılır.

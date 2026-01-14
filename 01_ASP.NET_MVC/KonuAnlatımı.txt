@@ -1,0 +1,34 @@
+﻿ASP.NET Microsoft tarafından geliştirilen ve web uygulamaları oluşturmak için kullanılan açık kaynaklı bir web framework'üdür. ASP.NET, .NET platformunun bir parçasıdır ve C# veya VB.NET gibi .NET dillerini kullanarak dinamik web siteleri, web uygulamaları ve web servisleri geliştirmeyi sağlar.
+C# ile geliştirilen projelerin WEB Uygulaması haline dönüştürülmesi.
+
+.NET: C# dili ile geliştirilen Web,Console,Masaüstü(Windows Form),Mobile,Oyun,IOT,WPF,Machine Learning gibi farklı proje şablonlarının ortak bir platformda geliştirilmesine ve iletişim(data transferi) yapılması sağlar.
+
+Design Pattern: Bütünlük oluşturan bir yapının mantıklı ve işlevsel bölümlere ayrılmasıdır. Bölümlere ayırarak geliştiriebilirliği ve kontrolü arttırılır.
+
+MVC 1979 yılında geliştirilmiş bir design patterndır. ASP.NET 2009 yılında geliştirilmiştir.
+
+M(odels)V(iews)C(ontrollers) bir kullanıcı arayüzüdür(user interface).
+
+Models:Bir proje geliştirilirken oluşturulan proje temel elemanları olan entities Models klasörü altında yazılır.
+Views:Projeyi oluşturan kullanıcı arayüzleri olan web sayfaları bu klasör altında yazılır.
+Controllers:Kullanıcıdan gelen istekleri(request) yöneten, bu istekler doğrultusunda database ile iletişim kuran ve okunan dataların web sayfalarına taşınmasını sağlayan controller metotlarının yazıldığı klasördür.
+
+*** HTTP:Hyper Text Transfer Protocol
+Farklı dillerde geliştirilen ve yayına alınan projelerin belirli standartlara uyması için belirlenen protokollerdir.
+
+HTTPS:Hyper Text Transfer Protocol Security
+
+*** NTIER (Katmanlı Mimarı)
+-Data Access Layer - 
+-Entities
+-Business Logic Layer
+-Web UI
+
+*** API: Application Programming Interface
+Farklı dillerde geliştirilmiş projelerin data transferi(iletişim kurabilmesi) için geliştirilen yazılım yapısıdır.
+
+
+Projeyi çalıştırdığınızda Program.cs baştan sona okunur ve MapControllerRoute olarak default ne tanımlandıysa ilk olarak onu açar.
+
+***Razor Syntax
+Html tagleri içerisinde C# programlama kodları yazmamızı sağlar. @ işareti ile tanımlanır. birden fazla satır veya kelime tanımlanacak ise @{ } arasında yazılır.

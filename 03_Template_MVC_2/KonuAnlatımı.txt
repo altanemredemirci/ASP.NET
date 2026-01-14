@@ -1,0 +1,7 @@
+﻿Hazır template dosyasının içindeki bulunan statik dosyaları wwwroot altına atıyoruz.
+
+HomeController altında Index sayfasını açıyoruz.
+
+Template Index.html sayfasında bulunan kodları Layout içerisine taşıdık.
+
+Layout a ortak alanları bırakıp sayfalara özel olan kısımlar için RenderBody() yazdık.

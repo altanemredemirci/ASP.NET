@@ -1,0 +1,28 @@
+﻿
+@{
+    string ad = "URAS DEMİRCİ";
+
+    List<string> sehirler = new List<string>() { "Adana", "Mardin", "Yozgat", "İstanbul" };
+
+}
+
+<h1>ALTAN EMRE</h1>
+
+<h2>@ad</h2>
+
+@foreach(string sehir in sehirler)
+{
+    <h3>@sehir</h3>
+}
+
+@for(int i=0; i < 10; i++)
+{
+    <h4>@i</h4>
+}
+
+@{int j=1;}
+@while (j < 10)
+{
+    <h5>@j</h5>
+    j++;
+}

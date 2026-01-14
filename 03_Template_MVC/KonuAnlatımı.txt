@@ -1,0 +1,9 @@
+﻿
+wwwroot klasörü statik dosyaların içinde bulunduğu ana klasördür. Statik dosyalar ise css,js gibi tasarım kodlarının bulunduğu dosyalardır.
+
+wwwroot ulaşmak için ~/ ifadesi ile ana dizine erişilebilir.
+
+
+Hazır bir template ti bir MVC projesine entegre ediyoruz. Bunun için statik dosyaları wwwroot atına taşıdık.
+HomeController altında bir Index action açarak html sayfayı aktif ettik. 
+Index.cshtml içerisine ise template'in index.html dosyasındaki kodları ekledik.
