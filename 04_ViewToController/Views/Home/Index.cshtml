@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* RAZOR: Html kodları içerisinde C# komutları yazmamızı sağlar.*@
+
+@*SelectListItem tipinde bir dizi oluşturuldu*@
+@{
+    SelectListItem[] liste = new SelectListItem[2]
+            {
+        new SelectListItem(){Text="Altan Emre"},
+        new SelectListItem(){Text="Uras"}
+            };
+}
+
+@*Html.Helper*@
+@using(Html.BeginForm()) @*Bir Form oluşturuldu*@
+{
+    @Html.Label("Ad")
+    <br />
+    @Html.TextBox("ad")
+    <br />
+    @Html.DropDownList("kisiler",liste)
+    <br />
+    @("Onaylıyorum:")@Html.CheckBox("onay")
+    <br />
+    <input type="submit" value="Gönder" />
+}
+<br /><br />
+<form action="/Home/Kayit" method="POST">
+    <label>Adınız:</label>
+    <input type="text" name="isim" />
+    <br />
+    <label>Soyadınız:</label>
+    <input type="text" name="soyisim" />
+    <button type="submit">Gönder</button>
+</form>
+
+
+<br />
+<br />
+<form asp-action="Kayit" method="POST">
+    <label>Adınız:</label>
+    <input type="text" name="isim" />
+    <br />
+    <label>Soyadınız:</label>
+    <input type="text" name="soyisim" />
+    <button type="submit">Gönder</button>
+</form>
