@@ -1,0 +1,23 @@
+﻿@model _09_Models_Binding.Models.Ogrenci
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+<form asp-action="Register" asp-controller="Okul">
+    <div>
+        <label>Ad</label><br />
+        <input asp-for="Ad" /><br />
+        <label>Soyad</label><br />
+        <input asp-for="Soyad" /><br />
+        <label>Numara</label><br />
+        <input asp-for="Numara" /><br />
+        <label>Telefon</label><br />
+        <input asp-for="Telefon" /><br />
+        <label>Adres</label><br />
+        <input asp-for="Adres" /><br />
+
+        <input type="submit" value="Kayıt Ol" />
+    </div>
+
+</form>

@@ -1,0 +1,19 @@
+﻿@model _09_Models_Binding.Models.Kisi
+@{
+    ViewData["Title"] = "Kayit";
+}
+
+<h1>Kayit</h1>
+
+<form asp-action="Kayit" asp-controller="Home" method="post">
+	<label>Ad:</label><br />
+	<input type="text" name="Ad" />
+	<br />
+	<label>Soyad:</label><br />
+	<input type="text" name="Soyad" />
+	<br />
+	<label>Yaş:</label><br />
+	<input asp-for="Yas" />
+	<br>
+	<button type="submit">Kayıt Ol</button>
+</form>
