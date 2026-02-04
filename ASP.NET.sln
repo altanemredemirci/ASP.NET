@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08_RenderSection", "08_Rend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09_Models_Binding", "09_Models_Binding\09_Models_Binding.csproj", "{FD3833EA-186A-4803-B6C8-1A5C8E3D7A26}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09_Models_Binding_2", "09_Models_Binding_2\09_Models_Binding_2.csproj", "{F78C7EBB-ECD6-469E-A5DA-99F7995992C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10_Fluent_Validation", "10_Fluent_Validation\10_Fluent_Validation.csproj", "{F04CACB1-E16F-4C05-A8F8-10E240642645}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{FD3833EA-186A-4803-B6C8-1A5C8E3D7A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD3833EA-186A-4803-B6C8-1A5C8E3D7A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD3833EA-186A-4803-B6C8-1A5C8E3D7A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78C7EBB-ECD6-469E-A5DA-99F7995992C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78C7EBB-ECD6-469E-A5DA-99F7995992C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78C7EBB-ECD6-469E-A5DA-99F7995992C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78C7EBB-ECD6-469E-A5DA-99F7995992C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F04CACB1-E16F-4C05-A8F8-10E240642645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04CACB1-E16F-4C05-A8F8-10E240642645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04CACB1-E16F-4C05-A8F8-10E240642645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04CACB1-E16F-4C05-A8F8-10E240642645}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

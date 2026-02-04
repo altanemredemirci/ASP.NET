@@ -1,0 +1,10 @@
+﻿Öğrenci:
+Numarası
+Ad
+Soyad
+Telefon
+Adres
+
+
+Fluent Validation ile gerekli doğrulamaları yazınız
+Kayıt işlemi sonucu veri tabanına kayıt edilmiş olsun.
