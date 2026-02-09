@@ -37,6 +37,23 @@ namespace _10_Fluent_Validation.Controllers
             return View("Success");
         }
 
+        public IActionResult Login()
+        {
+            return View(new Ogrenci());
+        }
 
+        [HttpPost]
+        public IActionResult Login(Ogrenci model)
+        {
+            var ogrenci = db.Ogrencis.Where(i => i.Telefon == model.Telefon).FirstOrDefault();
+
+            if (ogrenci == null)
+            {
+                ModelState.AddModelError("", "Kayıt bulunamadı.");
+                return View(model);
+            }
+
+            return View("Success");
+        }
     }
 }
