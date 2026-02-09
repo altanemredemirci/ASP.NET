@@ -39,7 +39,7 @@ namespace _10_Fluent_Validation
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Ogrenci}/{action=Register}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

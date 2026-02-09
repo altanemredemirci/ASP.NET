@@ -1,0 +1,46 @@
+﻿@model _10_Fluent_Validation.Models.Ogrenci
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="text-center">
+    <h2>Öğrenci Kayıt</h2>
+</div>
+<div class="row">
+
+    <div class="col-md-4 offset-4">
+        <form asp-action="Register" asp-controller="Ogrenci" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ad" class="control-label"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Soyad" class="control-label"></label>
+                <input asp-for="Soyad" class="form-control" />
+                <span asp-validation-for="Soyad" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Adres" class="control-label"></label>
+                <input asp-for="Adres" class="form-control" />
+                <span asp-validation-for="Adres" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Telefon" class="control-label"></label>
+                <input asp-for="Telefon" class="form-control" />
+                <span asp-validation-for="Telefon" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="submit" value="Kayıt Ol" class="btn btn-danger mt-2" />
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
