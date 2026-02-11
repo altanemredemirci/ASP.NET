@@ -1,0 +1,37 @@
+﻿
+@model List<Student>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (ViewBag.Aranan != null)
+{
+
+    <div class="text-center">
+      
+        <h1>@ViewBag.Aranan.Id</h1>
+        <h1>@ViewBag.Aranan.Name</h1>
+        <h1>@ViewBag.Aranan.Age</h1>
+      
+    </div>
+}
+else
+{
+    <div class="text-center">
+        @foreach (var student in Model)
+        {
+            <h1>@student.Name</h1>
+        }
+    </div>
+}
+
+
+<div class="mb-3">
+    <form asp-action="Search" method="post">
+        <label class="form-label">Aranacak Numara:</label>
+        <input type="number" class="form-control" name="numara"><br />
+        <input type="submit" class="btn btn-success" value="Ara" />
+    </form>
+
+</div>

@@ -1,0 +1,21 @@
+﻿
+@model Student
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+
+<form asp-action="Register" method="post">
+
+	<label>Ad:</label><br />
+	<input asp-for="Name" />
+	<br />
+	<label>Yaş:</label><br />
+	<input asp-for="Age" />
+	<br />	
+	<button type="submit">Kayıt Ol</button>
+
+</form>
+
