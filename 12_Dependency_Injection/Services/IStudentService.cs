@@ -5,6 +5,7 @@ namespace _12_Dependency_Injection.Services
 {
     public interface IStudentService
     {
+        //interface tanımlarda metot gövdesi tanımlanmaz.
         int Create(Student student);
         int Update();
         int Delete(int id);

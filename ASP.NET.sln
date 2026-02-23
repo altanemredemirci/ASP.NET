@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11_AutoMapper", "11_AutoMap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12_Dependency_Injection", "12_Dependency_Injection\12_Dependency_Injection.csproj", "{3FF2945D-D1FD-4486-8DBD-FC26FB6089E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13_State_Management", "13_State_Management\13_State_Management.csproj", "{2151C221-59E7-4425-BCF5-6F3427A32C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13_State_Management_2", "13_State_Management_2\13_State_Management_2.csproj", "{27A53A6C-CE66-454D-A179-A1F3F9289A18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +97,14 @@ Global
 		{3FF2945D-D1FD-4486-8DBD-FC26FB6089E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FF2945D-D1FD-4486-8DBD-FC26FB6089E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FF2945D-D1FD-4486-8DBD-FC26FB6089E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2151C221-59E7-4425-BCF5-6F3427A32C6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2151C221-59E7-4425-BCF5-6F3427A32C6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2151C221-59E7-4425-BCF5-6F3427A32C6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2151C221-59E7-4425-BCF5-6F3427A32C6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27A53A6C-CE66-454D-A179-A1F3F9289A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27A53A6C-CE66-454D-A179-A1F3F9289A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A53A6C-CE66-454D-A179-A1F3F9289A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27A53A6C-CE66-454D-A179-A1F3F9289A18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

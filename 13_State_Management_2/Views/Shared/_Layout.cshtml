@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - State Management Demo</title>
+
+    <!-- 🎨 CSS Dosyaları -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/themes.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/_13_State_Management.styles.css" asp-append-version="true" />
+
+    <!-- 🎨 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body data-theme="@(Context.Session.GetString("Theme") ?? Context.Request.Cookies["Theme"] ?? "light")">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+            <div class="container-fluid">
+                <!-- 🏠 Logo/Marka -->
+                <a class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-cogs"></i> State Management
+                </a>
+
+                <!-- 📱 Mobil Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse" id="navbarNav">
+                    <!-- 🔗 Sol Menü -->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home"></i> Ana Sayfa
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Demo">
+                                <i class="fas fa-chart-bar"></i> Session Demo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="ShoppingCart" asp-action="Index">
+                                <i class="fas fa-shopping-cart"></i> Ürünler
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- 🛒 Sağ Menü -->
+                    <ul class="navbar-nav">
+                        <!-- 🎨 Tema Toggle -->
+                        <li class="nav-item d-flex align-items-center me-3">
+                            <div class="theme-toggle" onclick="toggleTheme()" title="Tema Değiştir">
+                                <i class="fas fa-sun theme-toggle-icon sun-icon"></i>
+                                <i class="fas fa-moon theme-toggle-icon moon-icon"></i>
+                            </div>
+                        </li>
+
+                        <!-- 🛒 Sepet -->
+                        @* <li class="nav-item">
+                            <a class="nav-link position-relative" asp-controller="ShoppingCart" asp-action="ViewCart">
+                                <i class="fas fa-shopping-cart"></i> Sepet
+                                @{
+                                    var cartJson = Context.Session.GetString("Cart");
+                                    var cartCount = 0;
+                                    if (!string.IsNullOrEmpty(cartJson))
+                                    {
+                                        try
+                                        {
+                                            //var cartItems = Newtonsoft.Json.JsonConvert.DeserializeObject<List<_13_State_Management_2.Models.CartItem>>(cartJson);
+                                            //cartCount = cartItems?.Sum(x => x.Quantity) ?? 0;
+                                        }
+                                        catch { }
+                                    }
+                                }
+                                @if (cartCount > 0)
+                                {
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        @cartCount
+                                    </span>
+                                }
+                            </a>
+                        </li> *@
+
+                        <!-- 🌍 Dil Seçimi -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-globe"></i> Dil
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Language" asp-action="SetLanguage" asp-route-language="tr">
+                                        🇹🇷 Türkçe
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Language" asp-action="SetLanguage" asp-route-language="en">
+                                        🇺🇸 English
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 📄 Ana İçerik -->
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- 🦶 Footer -->
+    <footer class="border-top footer text-muted mt-5">
+        <div class="container py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    &copy; 2024 - State Management Demo
+                </div>
+                <div class="col-md-6 text-end">
+                    <small>
+                        Tema: <span id="current-theme">@(Context.Session.GetString("Theme") ?? "light")</span>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 📜 JavaScript -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- 🎯 Tema JavaScript -->
+    <script>
+        // 🎨 Tema Toggle Fonksiyonu
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            // Hemen görsel değişiklik yap
+            document.body.setAttribute('data-theme', newTheme);
+            document.getElementById('current-theme').textContent = newTheme;
+
+            // Server'a gönder
+            fetch('@Url.Action("SetThemeAjax", "Theme")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ theme: newTheme })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('✅ Tema değiştirildi:', data.theme);
+
+                    // Toast bildirimi göster
+                    showToast(data.message, 'success');
+                } else {
+                    console.error('❌ Tema değiştirilemedi:', data.message);
+                    // Geri al
+                    document.body.setAttribute('data-theme', currentTheme);
+                }
+            })
+            .catch(error => {
+                console.error('❌ Hata:', error);
+                // Geri al
+                document.body.setAttribute('data-theme', currentTheme);
+                showToast('Tema değiştirilemedi', 'error');
+            });
+        }
+
+        // 🎯 Toast Bildirimi
+        function showToast(message, type) {
+            const alertClass = type === 'success' ? 'alert-success' :
+                              type === 'error' ? 'alert-danger' : 'alert-info';
+
+            const toast = `
+                <div class="alert ${alertClass} alert-dismissible fade show position-fixed"
+                     style="top: 20px; right: 20px; z-index: 9999; min-width: 300px;" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', toast);
+
+            // 3 saniye sonra otomatik kapat
+            setTimeout(() => {
+                const alerts = document.querySelectorAll('.alert');
+                if (alerts.length > 0) {
+                    alerts[alerts.length - 1]?.remove();
+                }
+            }, 3000);
+        }
+
+        // 🎯 Sayfa yüklendiğinde tema kontrolü
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = '@(Context.Session.GetString("Theme") ?? Context.Request.Cookies["Theme"] ?? "light")';
+            document.body.setAttribute('data-theme', savedTheme);
+            console.log('🎨 Tema yüklendi:', savedTheme);
+        });
+
+        // 🎯 Keyboard shortcut (Ctrl+Shift+T)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+                e.preventDefault();
+                toggleTheme();
+            }
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
