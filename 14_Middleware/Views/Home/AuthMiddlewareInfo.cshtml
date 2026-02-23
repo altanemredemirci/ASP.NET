@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Authentication Middleware";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h3><i class="fas fa-lock"></i> SimpleAuth Middleware</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>🔐 Kimlik Doğrulama Middleware'i</h5>
+                            <p class="lead">Bu middleware, belirli sayfalara erişimi kontrol eder ve yetkisiz kullanıcıları engeller.</p>
+
+                            <h6><i class="fas fa-cogs"></i> Nasıl Çalışır?</h6>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">✅ Her HTTP isteğini yakalar</li>
+                                <li class="list-group-item">🔍 URL'nin korumalı olup olmadığını kontrol eder</li>
+                                <li class="list-group-item">👤 Session'da giriş bilgisi arar</li>
+                                <li class="list-group-item">🚫 Yetkisiz ise AccessDenied'a yönlendirir</li>
+                                <li class="list-group-item">✅ Yetkili ise işleme devam eder</li>
+                            </ul>
+
+                            <h6><i class="fas fa-shield-alt"></i> Korumalı Sayfalar</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="list-group">
+                                        <a href="/Home/Dashboard" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                                        </a>
+                                        <a href="/Home/Admin" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-user-shield"></i> Admin Panel
+                                        </a>
+                                        <a href="/Home/Settings" class="list-group-item list-group-item-action">
+                                            <i class="fas fa-cog"></i> Ayarlar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-code"></i> Kod Örneği</h6>
+                                </div>
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3 rounded"><code>public async Task InvokeAsync(HttpContext context)
+{
+    var path = context.Request.Path.Value?.ToLower();
+    
+    if (_protectedPaths.Any(p => path?.StartsWith(p) == true))
+    {
+        var isLoggedIn = context.Session.GetString("IsLoggedIn");
+        
+        if (isLoggedIn != "true")
+        {
+            context.Response.Redirect("/Home/AccessDenied");
+            return;
+        }
+    }
+    
+    await _next(context);
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 bg-info text-white">
+                                <div class="card-body text-center">
+                                    <h5><i class="fas fa-info-circle"></i> Test Et!</h5>
+                                    <p>Giriş yapmadan korumalı sayfalara erişmeyi dene</p>
+                                    <a href="/Home/Dashboard" class="btn btn-light">Dashboard'a Git</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

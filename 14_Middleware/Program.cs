@@ -1,3 +1,5 @@
+using _14_Middleware.Middlewares;
+
 namespace _14_Middleware
 {
     public class Program
@@ -8,6 +10,14 @@ namespace _14_Middleware
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
+            });
 
             var app = builder.Build();
 
@@ -19,9 +29,12 @@ namespace _14_Middleware
                 app.UseHsts();
             }
 
+
+            app.UseMiddleware<VisitorCounterMiddleware>(); //Ziyaret sayýsý
+
             app.UseHttpsRedirection();
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.MapStaticAssets();

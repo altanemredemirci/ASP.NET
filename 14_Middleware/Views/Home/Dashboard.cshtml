@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    var username = Context.Session.GetString("Username");
+    var isLoggedIn = Context.Session.GetString("IsLoggedIn");
+}
+
+@if(isLoggedIn != "true")
+{
+    <script>window.location.href='/Home/AccessDenied'</script>
+}
+
+<div class="alert alert-success">
+    <h4>Dashboard - Korumalı Alan</h4>
+    <p>Hoş Geldiniz <strong>@(username ?? "Bilinmeyen")</strong>!</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">👥 Ziyaretçiler</h5>
+                <h2 class="text-primary">@(ViewBag.TotalVisitors ?? 0)</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">📄 Bu Sayfa</h5>
+                <h2 class="text-info">@(ViewBag.CurrentPageVisits ?? 0)</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">🔒 Korumalı</h5>
+                <h2 class="text-success">✓</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="middleware-info mt-4">
+    <h6>🛡️ Middleware Koruması</h6>
+    <p>Bu sayfa SimpleAuthMiddleware tarafından korunuyor.</p>
+    <p>Sadece giriş yapmış kullanıcılar erişebilir.</p>
+    <p><strong>Ziyaretçi Sayısı:</strong> @(ViewBag.TotalVisitors ?? 0)</p>
+    <p><strong>Bu Sayfa:</strong> @(ViewBag.CurrentPageVisits ?? 0) kez ziyaret edildi</p>
+</div>

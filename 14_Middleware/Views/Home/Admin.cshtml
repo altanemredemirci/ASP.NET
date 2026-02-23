@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="alert alert-danger">
+    <h4>Admin Paneli</h4>
+    <p>Bu alan sadece yöneticiler için!</p>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h5>Sistem Bilgileri</h5>
+    </div>
+
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <td><strong>Kullanıcı:</strong></td>
+                <td>@(Context.Session.GetString("Username"))</td>
+            </tr>
+            <tr>
+                <td><strong>Giriş Zamanı:</strong></td>
+                <td>@DateTime.Now.ToString("dd.MM.yyyy HH:mm")</td>
+            </tr>
+            <tr>
+                <td><strong>Toplam Ziyaretçi:</strong></td>
+                <td>@(ViewBag.TotalVisitors ?? 0)</td>
+            </tr>
+        </table>
+    </div>
+</div>

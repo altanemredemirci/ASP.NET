@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "Visitor Counter Middleware";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
+                    <h3><i class="fas fa-users"></i> Visitor Counter Middleware</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>👥 Ziyaretçi Sayacı Middleware'i</h5>
+                            <p class="lead">Bu middleware, uygulamaya gelen her isteği sayar ve toplam ziyaretçi sayısını tutar.</p>
+
+                            <!-- Anlık Ziyaretçi Sayısı -->
+                            <div class="alert alert-info text-center mb-4">
+                                <h2><i class="fas fa-chart-line"></i> Anlık Ziyaretçi Sayısı</h2>
+                                <h1 class="display-4 text-primary">
+                                    <span id="visitorCount">@(ViewBag.VisitorCount ?? 0)</span>
+                                </h1>
+                                <button class="btn btn-primary" onclick="refreshPage()">
+                                    <i class="fas fa-sync-alt"></i> Sayfayı Yenile
+                                </button>
+                            </div>
+
+                            <h6><i class="fas fa-cogs"></i> Nasıl Çalışır?</h6>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">📊 Her HTTP isteğinde sayacı 1 artırır</li>
+                                <li class="list-group-item">🔒 Thread-safe sayaç kullanır (lock mekanizması)</li>
+                                <li class="list-group-item">💾 Static değişken ile sayıyı hafızada tutar</li>
+                                <li class="list-group-item">🌐 HttpContext.Items'a sayıyı ekler</li>
+                                <li class="list-group-item">📈 Uygulama yeniden başlatılana kadar sayar</li>
+                            </ul>
+
+                            <h6><i class="fas fa-info-circle"></i> Özellikler</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6>✅ Avantajlar</h6>
+                                            <ul class="small">
+                                                <li>Basit ve hızlı</li>
+                                                <li>Thread-safe</li>
+                                                <li>Düşük bellek kullanımı</li>
+                                                <li>Gerçek zamanlı sayım</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6>⚠️ Sınırlamalar</h6>
+                                            <ul class="small">
+                                                <li>Uygulama restart'ta sıfırlanır</li>
+                                                <li>Kalıcı depolama yok</li>
+                                                <li>Tek sunucu için geçerli</li>
+                                                <li>Bot trafiği de sayılır</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-code"></i> Kod Örneği</h6>
+                                </div>
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3 rounded small"><code>public async Task InvokeAsync(HttpContext context)
+{
+    lock (_lock)
+    {
+        _visitorCount++;
+    }
+    
+    context.Items["VisitorCount"] = _visitorCount;
+    
+    Console.WriteLine($"Ziyaretçi: {_visitorCount}");
+    
+    await _next(context);
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 bg-success text-white">
+                                <div class="card-body text-center">
+                                    <h5><i class="fas fa-test-tube"></i> Test Et!</h5>
+                                    <p>Sayacı test etmek için:</p>
+                                    <button class="btn btn-light text-dark mb-2" onclick="openNewTab()">
+                                        <i class="fas fa-external-link-alt"></i> Yeni Sekme Aç
+                                    </button>
+                                    <br>
+                                    <button class="btn btn-light text-dark" onclick="refreshMultiple()">
+                                        <i class="fas fa-sync-alt"></i> 5x Yenile
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 bg-info text-white">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-lightbulb"></i> İpucu</h6>
+                                    <p class="small mb-0">
+                                        Console çıktısını görmek için Visual Studio'da
+                                        Debug Output penceresine bak!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function refreshPage() {
+        location.reload();
+    }
+
+    function openNewTab() {
+        window.open(window.location.href, '_blank');
+    }
+
+    function refreshMultiple() {
+        for(let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                location.reload();
+            }, i * 1000);
+        }
+    }
+</script>
