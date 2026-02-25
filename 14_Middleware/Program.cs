@@ -29,12 +29,17 @@ namespace _14_Middleware
                 app.UseHsts();
             }
 
+            //Middleware Pipeline Sýrasý Önemli 
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
-            app.UseMiddleware<VisitorCounterMiddleware>(); //Ziyaret sayýsý
-
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseSession();
+            app.UseMiddleware<RequestTimeMiddleware>(); //Ýstek süresi
+            app.UseMiddleware<VisitorCounterMiddleware>(); //Ziyaret sayýsý             
+            app.UseMiddleware<SimpleAuthMiddleware>(); //Basit yetkilendirme
+            
             app.UseAuthorization();
 
             app.MapStaticAssets();

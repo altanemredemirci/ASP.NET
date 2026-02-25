@@ -13,24 +13,27 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
-            // Her istek için sayacı artır
-            lock (_lock)
+            string path = context.Request.Path.Value?.ToLower() ?? "";
+
+            if (!path.Contains("favicon.ico") && !Path.HasExtension(path))
             {
-                _visitorCount++;
+                lock (_lock)
+                {
+                    _visitorCount++;
+                }
             }
 
-            // Visitor count'u HttpContext'e ekle
             context.Items["VisitorCount"] = _visitorCount;
 
-            // Console'a yazdır (debug için)
-            Console.WriteLine($"🔢 Ziyaretçi Sayısı: {_visitorCount}");
-
+            Console.WriteLine($"Ziyatreçi sayısı:{_visitorCount}");
             await _next(context);
         }
+
 
         public static int GetVisitorCount()
         {
             return _visitorCount;
         }
     }
+
 }

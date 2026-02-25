@@ -93,6 +93,22 @@ namespace _14_Middleware.Controllers
             return View();
         }
 
+        public IActionResult ErrorMiddlewareInfo()
+        {
+            ViewBag.TotalVisitors = HttpContext.Items["VisitorCount"] ?? 0;
+            ViewBag.CurrentPageVisits = HttpContext.Items["CurrentPageVisits"] ?? 0;
+
+            return View();
+        }
+
+        public IActionResult TimeMiddlewareInfo()
+        {
+            ViewBag.TotalVisitors = HttpContext.Items["VisitorCount"] ?? 0;
+            ViewBag.CurrentPageVisits = HttpContext.Items["CurrentPageVisits"] ?? 0;
+
+            return View();
+        }
+
 
 
         public IActionResult AccessDenied()

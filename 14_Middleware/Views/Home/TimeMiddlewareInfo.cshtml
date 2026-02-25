@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Request Time Middleware";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h3><i class="fas fa-clock"></i> Request Time Middleware</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>⏱️ İstek Süresi Ölçüm Middleware'i</h5>
+                            <p class="lead">Bu middleware, HTTP isteklerinin ne kadar sürede tamamlandığını ölçer ve loglar.</p>
+
+                            <h6><i class="fas fa-cogs"></i> Nasıl Çalışır?</h6>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">⏰ İstek başlangıcında Stopwatch başlatır</li>
+                                <li class="list-group-item">🔄 Pipeline'daki diğer middleware'leri çalıştırır</li>
+                                <li class="list-group-item">⏹️ İstek tamamlandığında süreyi ölçer</li>
+                                <li class="list-group-item">📝 Süreyi console'a loglar</li>
+                                <li class="list-group-item">📊 Response header'ına süreyi ekler</li>
+                            </ul>
+
+                            <h6><i class="fas fa-chart-line"></i> Performans Metrikleri</h6>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card bg-success text-white text-center">
+                                        <div class="card-body">
+                                            <h4><i class="fas fa-tachometer-alt"></i></h4>
+                                            <h5>&lt; 100ms</h5>
+                                            <p>Hızlı</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-warning text-dark text-center">
+                                        <div class="card-body">
+                                            <h4><i class="fas fa-clock"></i></h4>
+                                            <h5>100-500ms</h5>
+                                            <p>Orta</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-danger text-white text-center">
+                                        <div class="card-body">
+                                            <h4><i class="fas fa-exclamation-triangle"></i></h4>
+                                            <h5>&gt; 500ms</h5>
+                                            <p>Yavaş</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-code"></i> Kod Örneği</h6>
+                                </div>
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3 rounded"><code>public async Task InvokeAsync(HttpContext context)
+{
+    var stopwatch = Stopwatch.StartNew();
+    
+    await _next(context);
+    
+    stopwatch.Stop();
+    var elapsed = stopwatch.ElapsedMilliseconds;
+    
+    _logger.LogInformation(
+        "İstek {Method} {Path} {ElapsedMs}ms sürdü",
+        context.Request.Method,
+        context.Request.Path,
+        elapsed);
+    
+    context.Response.Headers.Add(
+        "X-Response-Time", 
+        $"{elapsed}ms");
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 bg-info text-white">
+                                <div class="card-body text-center">
+                                    <h5><i class="fas fa-search"></i> Test Et!</h5>
+                                    <p>Browser Developer Tools'da Network sekmesini aç ve Response Time header'ını gör</p>
+                                    <button onclick="location.reload()" class="btn btn-light">Sayfayı Yenile</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Error Handling Middleware";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Error Handling Middleware</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>🚨 Hata Yönetimi Middleware'i</h5>
+                            <p class="lead">Bu middleware, uygulamada oluşan hataları yakalar ve kullanıcı dostu mesajlar gösterir.</p>
+
+                            <h6><i class="fas fa-cogs"></i> Nasıl Çalışır?</h6>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">🛡️ Try-catch bloğu ile tüm hataları yakalar</li>
+                                <li class="list-group-item">📝 Hata detaylarını loglar</li>
+                                <li class="list-group-item">👤 Kullanıcıya anlaşılır mesaj gösterir</li>
+                                <li class="list-group-item">🔧 Development/Production ortamına göre farklı davranır</li>
+                                <li class="list-group-item">📊 HTTP status kodlarını düzgün set eder</li>
+                            </ul>
+
+                            <h6><i class="fas fa-bug"></i> Yakalanan Hata Türleri</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="alert alert-warning">
+                                        <h6><i class="fas fa-search"></i> 404 - Sayfa Bulunamadı</h6>
+                                        <p>İstenen kaynak bulunamadığında</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="alert alert-danger">
+                                        <h6><i class="fas fa-times"></i> 500 - Sunucu Hatası</h6>
+                                        <p>Uygulama hatalarında</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h6><i class="fas fa-shield-alt"></i> Middleware Özellikleri</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6>🔍 Development Modu</h6>
+                                            <ul class="small">
+                                                <li>Detaylı hata mesajları</li>
+                                                <li>Stack trace gösterir</li>
+                                                <li>Debug bilgileri</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6>🛡️ Production Modu</h6>
+                                            <ul class="small">
+                                                <li>Güvenli hata mesajları</li>
+                                                <li>Kullanıcı dostu görünüm</li>
+                                                <li>Güvenlik odaklı</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h6><i class="fas fa-code"></i> Kod Örneği</h6>
+                                </div>
+                                <div class="card-body">
+                                    <pre class="bg-dark text-light p-3 rounded small"><code>public async Task InvokeAsync(HttpContext context)
+{
+    try
+    {
+        await _next(context);
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Hata oluştu");
+        
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "text/html";
+        
+        var errorHtml = "Hata mesajı burada";
+        
+        await context.Response.WriteAsync(errorHtml);
+    }
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 bg-warning text-dark">
+                                <div class="card-body text-center">
+                                    <h5><i class="fas fa-bug"></i> Test Et!</h5>
+                                    <p>Hata middleware'ini test etmek için:</p>
+                                    <a href="/Home/NonExistentPage" class="btn btn-dark mb-2">
+                                        <i class="fas fa-search"></i> 404 Hatası
+                                    </a>
+                                    <br>
+                                    <small class="text-muted">Olmayan bir sayfaya gidecek</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
